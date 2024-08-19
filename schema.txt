@@ -1,0 +1,77 @@
+{
+    "type": "object",
+    "properties": {
+        "content_validation_definition": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "name of the check"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "path of the file which has to be checked"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "type of check. only generic is supported",
+                        "default": "generic"
+                    },
+                    "pattern": {
+                        "type": "string",
+                        "description": "pattern to check in the file"
+                    },
+                    "required": {
+                        "description": "true if pattern is expected to be in the file else false, default is true",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "condition": {
+                        "type": "string",
+                        "description": "the condition that is to be validated"
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "sysdm path to value that is to be validated"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "source of the sysdm object to be evaluated in the condition"
+                    },
+                    "min_version": {
+                        "type": "string",
+                        "description": "minimum db version check"
+                    }
+                },
+                "required": [
+                    "name"
+                ],
+                "anyOf": [
+                    {
+                        "required": [
+                            "name",
+                            "path",
+                            "pattern"
+                        ]
+                    },
+                    {
+                        "required": [
+                            "name",
+                            "condition"
+                        ]
+                    },
+                    {
+                        "required": [
+                            "name",
+                            "value"
+                        ]
+                    }
+                ]
+            },
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false
+}
